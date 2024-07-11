@@ -1,0 +1,21 @@
+{% extends 'starter-page.html' %}
+{% load static %}
+
+{% block body %}
+    <form action="" class="container" method="POST">
+    {% csrf_token %}
+    <h1 class="text-center">PATIENT FORM</h1>
+
+        <label for="name" class="form-label" >Fullname: </label>
+        <input type="text" id="name" name="fullname" placeholder="Enter full name" required="required">
+        <br><br>
+        <label for="email" class="form-label" >Email address: </label>
+        <input type="text" id="email" name="email"   placeholder="abc@gmail.com" required="required">
+        <br><br>
+        <label for="medhistory">Medical history:</label>
+        <textarea name="medhistory" class="form-control"  id="medhistory" cols="10" rows="10" placeholder="Type sth here...." required="required"></textarea>
+        <br><br>
+
+    <button type="submit" class="container w-25">SUBMIT</button>
+    </form>
+{% endblock %}
