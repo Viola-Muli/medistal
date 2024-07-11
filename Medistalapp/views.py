@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from Medistalapp.models import Company, Patient , Appointment
-
+from Medistalapp.forms import Appointmentform
 
 # Create your views here.
 def index(request):
@@ -80,7 +80,14 @@ def edit(request,id):
     appointment = Appointment.objects.get(id=id)
     return render(request,'edit.html',{'x':appointment})
 
-
+def update(request,id):
+    appointment = Appointment.objects.get(id=id)
+    form = Appointmentform(request.POST,instance=appointment)
+    if form.is_valid():
+        form.save()
+        return redirect('/show')
+    else:
+        return render(request,'edit.html')
 
 
 

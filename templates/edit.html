@@ -2,7 +2,7 @@
 {% load static %}
 {% block body %}
 <h1 class="text-center">Update information</h1>
- <form action="" method="POST" class="container" >
+ <form action="/update/{{ x.id }}" method="POST" class="container" >
             {% csrf_token %}
 
           <div class="row">
