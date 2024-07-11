@@ -1,0 +1,60 @@
+{% extends 'starter-page.html' %}
+{% load static %}
+{% block body %}
+<h1 class="text-center">Update information</h1>
+ <form action="" method="POST" class="container" >
+            {% csrf_token %}
+
+          <div class="row">
+            <div class="col-md-4 form-group">
+              <input type="text" name="name" class="form-control" id="name" value="{{ x.name }}" placeholder="Your Name" required="">
+            </div>
+            <div class="col-md-4 form-group mt-3 mt-md-0">
+              <input type="email" class="form-control" name="email" id="email" value="{{ x.email }}" placeholder="Your Email" required="">
+            </div>
+            <div class="col-md-4 form-group mt-3 mt-md-0">
+              <input type="tel" class="form-control" name="phone" id="phone" value="{{ x.phone }}" placeholder="Your Phone" required="">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 form-group mt-3">
+              <input type="date" name="date" class="form-control datepicker" id="date" value="{{ x.date }}" placeholder="Appointment Date" required="">
+            </div>
+            <div class="col-md-4 form-group mt-3">
+              <select name="department" id="department" class="form-select" required="">
+                <option value="">Select Department</option>
+                <option value="Department 1">Cardiology</option>
+                <option value="Department 2">Neurology</option>
+                <option value="Department 3">Pediatrics</option>
+              </select>
+            </div>
+            <div class="col-md-4 form-group mt-3">
+              <select name="doctor" id="doctor" value="{{ x.doctor}}" class="form-select" required="">
+                <option value="">Select Doctor</option>
+                <option value="Doctor 1">Walter</option>
+                <option value="Doctor 2">Sarah</option>
+                <option value="Doctor 3">William</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group mt-3">
+            <textarea class="form-control" name="message" rows="5" value="{{ x.message }}" placeholder="Message (Optional)"></textarea>
+          </div>
+          <div class="mt-3">
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your appointment request has been sent successfully. Thank you!</div>
+            <div class="text-center"><button class="btn btn-danger" type="submit">Update</button></div>
+          </div>
+        </form>
+
+
+
+
+
+
+
+
+
+{% endblock %}

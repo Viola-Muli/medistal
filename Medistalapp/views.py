@@ -76,7 +76,9 @@ def delete(request,id):
     return redirect('/show')
 
 
-
+def edit(request,id):
+    appointment = Appointment.objects.get(id=id)
+    return render(request,'edit.html',{'x':appointment})
 
 
 
