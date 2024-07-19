@@ -1,11 +1,22 @@
 from django.shortcuts import render, redirect
-from Medistalapp.models import Company, Patient , Appointment
-from Medistalapp.forms import Appointmentform
+from Medistalapp.models import Company, Patient, Appointment, Member, ImageModel
+
+from Medistalapp.forms import Appointmentform, ImageUploadForm
+
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
-
+    if request.method == 'POST':
+        if Member.objects.filter(
+             username=request.POST['username'],
+             password=request.POST['password']).exists():
+            member = Member.objects.get(username=request.POST['username'],
+                                        password=request.POST['password'])
+            return render(request,'index.html', {'member': member})
+        else:
+            return render(request,'login.html')
+    else:
+         return render(request,'login.html')
 
 def starter(request):
     return render(request, 'starter-page.html')
@@ -90,7 +101,36 @@ def update(request,id):
         return render(request,'edit.html')
 
 
+def register(request):
+    if request.method == 'POST':
+        members = Member(
+            name=request.POST['name'],
+            username=request.POST['username'],
+            password=request.POST['password'], )
+        members.save()
+        return redirect('/login')
+    else:
+        return render(request, 'register.html')
+def login(request):
+    return render(request,'login.html')
+def upload_image(request):
+    if request.method == 'POST':
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/showimage')
+    else:
+        form = ImageUploadForm()
+    return render(request, 'upload.html', {'form': form})
 
+def show_image(request):
+    images = ImageModel.objects.all()
+    return render(request, 'showimages.html', {'images': images})
+
+def imagedelete(request, id):
+    image = ImageModel.objects.get(id=id)
+    image.delete()
+    return redirect('/showimage')
 
 
 
